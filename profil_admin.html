@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Admin – Collège Sainte Christine</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #121212;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 10px;
+      background: linear-gradient(120deg, #1e40af, #2563eb);
+      color: white;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    .profil-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #1f2937;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .profil-item {
+      margin-bottom: 18px;
+    }
+
+    .profil-item label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #60a5fa;
+    }
+
+    .profil-item input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background-color: #374151;
+      color: white;
+    }
+
+    .profil-item input:disabled {
+      opacity: 0.8;
+    }
+
+    .edit-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #2563eb;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .edit-btn:hover {
+      background-color: #1e40af;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+      margin-top: auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Profil de l'Administrateur</h1>
+  </header>
+
+  <div class="profil-container">
+    <div class="profil-item">
+      <label>Nom</label>
+      <input type="text" value="Ngoma" disabled>
+    </div>
+
+    <div class="profil-item">
+      <label>Post-nom</label>
+      <input type="text" value="Mayele" disabled>
+    </div>
+
+    <div class="profil-item">
+      <label>Prénom</label>
+      <input type="text" value="Élie" disabled>
+    </div>
+
+    <div class="profil-item">
+      <label>Adresse</label>
+      <input type="text" value="Kinshasa, Mont-Ngafula" disabled>
+    </div>
+
+    <div class="profil-item">
+      <label>Numéro</label>
+      <input type="text" value="+243 826 000 000" disabled>
+    </div>
+
+    <div class="profil-item">
+      <label>Email</label>
+      <input type="email" value="admin@christine.cd" disabled>
+    </div>
+
+    <div class="profil-item">
+      <label>Rôle</label>
+      <input type="text" value="Administrateur" disabled>
+    </div>
+
+    <button class="edit-btn" onclick="alert('Fonction modifier à venir')">✏️ Modifier</button>
+  </div>
+
+  <footer>© Collège Sainte Christine – Administration</footer>
+
+</body>
+</html>

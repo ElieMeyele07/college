@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion – Collège Sainte Christine</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      flex-direction: column;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      padding: 30px;
+      background-color: #f4f7fc;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-container h1 {
+      text-align: center;
+      color: #004aad;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background-color: #e0e7f1;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #004aad;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #003380;
+    }
+
+    .demo-link {
+      margin-top: 20px;
+      text-align: center;
+      color: #004aad;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: underline;
+      user-select: none;
+      font-size: 1rem;
+    }
+
+    .demo-link:hover {
+      color: #002855;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Collège Sainte Christine</h1>
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="email">Adresse Email</label>
+        <input type="email" id="email" placeholder="Entrez votre email" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" placeholder="Entrez votre mot de passe" required />
+      </div>
+      <button type="submit">Se connecter</button>
+    </form>
+  </div>
+
+  <div class="demo-link" onclick="demoLogin()">Test Demo</div>
+  <div class="demo-link" onclick="demoAdminLogin()">Demo Admin</div>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (email && password) {
+        alert("Connexion en cours...\nEmail: " + email);
+        // Tu peux ici envoyer les données au serveur (fetch/post)
+      } else {
+        alert("Veuillez remplir tous les champs !");
+      }
+    }
+
+    function demoLogin() {
+      window.location.href = "index.html";
+    }
+
+    function demoAdminLogin() {
+      window.location.href = "admin.html";
+    }
+  </script>
+</body>
+</html>

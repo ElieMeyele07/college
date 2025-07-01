@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Messagerie</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      color: #003366;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #004080;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: bold;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-button {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: white;
+      color: #004080;
+    }
+
+    main {
+      flex: 1;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      gap: 12px;
+    }
+
+    .input-area {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      background-color: #ffffff;
+      padding: 10px;
+      border: 1px solid #0074d9;
+      border-radius: 10px;
+    }
+
+    .input-area textarea {
+      flex: 1;
+      resize: vertical;
+      min-height: 100px;
+      max-height: 200px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .input-area input[type="file"] {
+      display: none;
+    }
+
+    .icon-button {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: #0074d9;
+      cursor: pointer;
+    }
+
+    .send-button {
+      background-color: #0074d9;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .conversation-button {
+      background-color: #004080;
+      color: white;
+      padding: 12px;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .send-button {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+
+      .conversation-button {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>💬 Messagerie</h1>
+    <button class="back-button" onclick="window.location.href='index.html'">⬅ Retour</button>
+  </header>
+
+  <main>
+    <!-- Zone de saisie uniquement -->
+    <form class="input-area" id="message-form">
+      <label for="file-input" class="icon-button" title="Joindre une image">📎</label>
+      <input type="file" id="file-input" accept="image/*">
+      <textarea id="text-input" placeholder="Écrire un long message..."></textarea>
+      <button type="submit" class="send-button">Envoyer</button>
+    </form>
+
+    <!-- Bouton vers la page de conversations -->
+    <button class="conversation-button" onclick="window.location.href='conversations.html'">🗂️ Conversations</button>
+  </main>
+
+  <script>
+    const form = document.getElementById('message-form');
+    const textInput = document.getElementById('text-input');
+    const fileInput = document.getElementById('file-input');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const message = textInput.value.trim();
+      const file = fileInput.files[0];
+
+      if (!message && !file) {
+        alert("Veuillez écrire un message ou ajouter une image.");
+        return;
+      }
+
+      console.log("📤 Message texte :", message);
+      if (file) {
+        console.log("📤 Image jointe :", file.name);
+      }
+
+      alert("Message envoyé ! (simulation)");
+
+      // Réinitialiser
+      textInput.value = "";
+      fileInput.value = "";
+    });
+  </script>
+
+</body>
+</html>

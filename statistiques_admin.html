@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statistiques Admin – Collège Sainte Christine</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #121212;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 10px;
+      background: linear-gradient(120deg, #1e40af, #2563eb);
+      color: white;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    .stats-container {
+      max-width: 700px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #1f2937;
+      padding: 25px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .card .icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .card .label {
+      color: #60a5fa;
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .card .value {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+      margin-top: auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Statistiques Générales</h1>
+  </header>
+
+  <div class="stats-container">
+    <div class="card">
+      <div class="icon">👨‍🎓</div>
+      <div class="label">Élèves inscrits</div>
+      <div class="value">432</div>
+    </div>
+
+    <div class="card">
+      <div class="icon">👨‍🏫</div>
+      <div class="label">Professeurs</div>
+      <div class="value">38</div>
+    </div>
+
+    <div class="card">
+      <div class="icon">✅</div>
+      <div class="label">Élèves actifs</div>
+      <div class="value">420</div>
+    </div>
+
+    <div class="card">
+      <div class="icon">📝</div>
+      <div class="label">Publications</div>
+      <div class="value">68</div>
+    </div>
+  </div>
+
+  <footer>© Collège Sainte Christine – Administration</footer>
+
+</body>
+</html>

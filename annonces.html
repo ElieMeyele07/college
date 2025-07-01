@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annonces – Collège Sainte Christine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background-color: #f0f6ff;
+      color: #222;
+    }
+
+    header {
+      background-color: #004aad;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 18px;
+    }
+
+    .back-button {
+      background-color: white;
+      color: #004aad;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .announcement {
+      background-color: white;
+      border-radius: 12px;
+      padding: 15px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+      margin-bottom: 20px;
+    }
+
+    .announcement h3 {
+      margin-top: 0;
+      color: #004aad;
+    }
+
+    .announcement .date {
+      font-size: 12px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+
+    .attachment {
+      margin-top: 10px;
+    }
+
+    .attachment a {
+      text-decoration: none;
+      color: #0076d1;
+      font-weight: 500;
+    }
+
+    .announcement img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .announcement video {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📢 Annonces</h1>
+    <button class="back-button" onclick="window.location.href='index.html'">⬅ Retour</button>
+  </header>
+
+  <div class="container">
+
+    <div class="announcement">
+      <h3>Réunion des parents</h3>
+      <div class="date">01 juillet 2025</div>
+      <p>La réunion des parents d’élèves de la 6e aura lieu le samedi à 10h00 dans la grande salle.</p>
+    </div>
+
+    <div class="announcement">
+      <h3>Résultat du test d'entrée</h3>
+      <div class="date">28 juin 2025</div>
+      <p>Voici les résultats officiels du test d’entrée 2025.</p>
+      <div class="attachment">
+        📎 <a href="assets/pdfs/resultats.pdf" target="_blank">Télécharger le PDF</a>
+      </div>
+    </div>
+
+    <div class="announcement">
+      <h3>Nouvel uniforme scolaire</h3>
+      <div class="date">25 juin 2025</div>
+      <p>Voici l’image du nouvel uniforme scolaire qui sera porté à partir de septembre.</p>
+      <img src="assets/images/uniforme.jpg" alt="Uniforme" />
+    </div>
+
+    <div class="announcement">
+      <h3>Message du Directeur</h3>
+      <div class="date">20 juin 2025</div>
+      <p>Un mot du directeur pour féliciter les élèves pour leurs efforts.</p>
+      <video controls>
+        <source src="assets/videos/message.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercices – Collège Sainte Christine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background-color: #f0f6ff;
+    }
+
+    header {
+      background-color: #004aad;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 18px;
+    }
+
+    .back-button {
+      background-color: white;
+      color: #004aad;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .container {
+      padding: 30px 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .question-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .question-card h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #004aad;
+    }
+
+    .option {
+      background-color: #e6f0ff;
+      margin: 10px 0;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #d4e7ff;
+    }
+
+    .option.correct {
+      background-color: #b4f3c4 !important;
+    }
+
+    .option.incorrect {
+      background-color: #ffcccc !important;
+    }
+
+    .next-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🧠 Exercices</h1>
+    <button class="back-button" onclick="window.location.href='index.html'">⬅ Retour</button>
+  </header>
+
+  <div class="container">
+    <div class="question-card" id="quiz">
+      <h2 id="question">Chargement...</h2>
+      <div id="options"></div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Question suivante</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Quel est le résultat de 8 + 5 ?",
+        options: ["10", "12", "13", "15"],
+        correct: 2
+      },
+      {
+        question: "Combien de continents y a-t-il ?",
+        options: ["5", "6", "7", "8"],
+        correct: 2
+      },
+      {
+        question: "Quelle est la capitale de la RDC ?",
+        options: ["Lubumbashi", "Kinshasa", "Goma", "Bunia"],
+        correct: 1
+      },
+      {
+    question: "Quelle est la capitale de la RDC ?",
+    options: ["Lubumbashi", "Goma", "Kinshasa", "Mbuji-Mayi"],
+    correct: 2
+  },
+  {
+    question: "Combien de provinces compte la RDC depuis 2015 ?",
+    options: ["11", "21", "24", "26"],
+    correct: 3
+  },
+  {
+    question: "Quel est le fleuve qui traverse la RDC ?",
+    options: ["Fleuve Nil", "Fleuve Congo", "Fleuve Niger", "Fleuve Zambèze"],
+    correct: 1
+  },
+  {
+    question: "Quel est le premier président de la RDC ?",
+    options: ["Laurent-Désiré Kabila", "Mobutu", "Joseph Kasa-Vubu", "Patrice Lumumba"],
+    correct: 2
+  },
+  {
+    question: "Quelle est la monnaie utilisée en RDC ?",
+    options: ["Franc congolais", "CFA", "Dollar US", "Naira"],
+    correct: 0
+  },
+  {
+    question: "Quel est le plus grand parc national en RDC ?",
+    options: ["Parc de la Salonga", "Parc de la Garamba", "Parc des Virunga", "Parc Upemba"],
+    correct: 0
+  },
+  {
+    question: "Quel volcan actif se trouve au Nord-Kivu ?",
+    options: ["Nyiragongo", "Kilimandjaro", "Elgon", "Ngaliema"],
+    correct: 0
+  },
+  {
+    question: "Quelle est la langue officielle de la RDC ?",
+    options: ["Swahili", "Français", "Lingala", "Kikongo"],
+    correct: 1
+  },
+    ];
+
+    let currentQuestion = 0;
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById("question").innerText = q.question;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      q.options.forEach((option, index) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.innerText = option;
+        div.onclick = () => checkAnswer(div, index === q.correct);
+        optionsDiv.appendChild(div);
+      });
+      document.getElementById("nextBtn").style.display = "none";
+    }
+
+    function checkAnswer(el, isCorrect) {
+      const allOptions = document.querySelectorAll(".option");
+      allOptions.forEach(opt => {
+        opt.onclick = null;
+        opt.classList.remove("correct", "incorrect");
+      });
+      el.classList.add(isCorrect ? "correct" : "incorrect");
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+      } else {
+        document.getElementById("quiz").innerHTML = "<h2>🎉 Exercice terminé !</h2>";
+      }
+    }
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>

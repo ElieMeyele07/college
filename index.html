@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accueil – Collège Sainte Christine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background-color: #f5f9ff;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(120deg, #004aad, #0076d1);
+      color: white;
+      padding: 40px 20px 60px;
+      text-align: center;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    .container {
+      margin-top: -40px;
+      padding: 0 20px 60px;
+      flex-grow: 1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px 15px;
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      color: #004aad;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .logout-container {
+      text-align: center;
+      padding: 20px 0;
+      background: transparent;
+    }
+
+    .logout-button {
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .logout-button:hover {
+      background-color: #cc0000;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Collège Sainte Christine</h1>
+    <p>Bienvenue sur votre espace élève 👋</p>
+  </header>
+  <br>
+  <br>
+  <br>
+
+  <div class="container">
+    <div class="grid">
+      <a href="repechage.html" class="card">
+        <div class="card-icon">📄</div>
+        <div class="card-title">Repêchage</div>
+      </a>
+
+      <a href="annonces.html" class="card">
+        <div class="card-icon">📢</div>
+        <div class="card-title">Annonces</div>
+      </a>
+
+      <a href="exercices.html" class="card">
+        <div class="card-icon">🧠</div>
+        <div class="card-title">Exercices</div>
+      </a>
+
+      <a href="horaire.html" class="card">
+        <div class="card-icon">📆</div>
+        <div class="card-title">Horaire & Examens</div>
+      </a>
+
+      <a href="messagerie.html" class="card">
+        <div class="card-icon">💬</div>
+        <div class="card-title">Messagerie</div>
+      </a>
+
+      <a href="conversations.html" class="card">
+        <div class="card-icon">💭</div>
+        <div class="card-title">Conversations</div>
+      </a>
+
+      <a href="items.html" class="card">
+        <div class="card-icon">📚</div>
+        <div class="card-title">Items 6e</div>
+      </a>
+
+      <a href="profil.html" class="card">
+        <div class="card-icon">👤</div>
+        <div class="card-title">Profil</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="logout-container">
+    <button class="logout-button" onclick="deconnexion()">Déconnexion</button>
+  </div>
+
+  <script>
+    function deconnexion() {
+      // Ici tu peux mettre ta logique de déconnexion,
+      // par exemple rediriger vers une page logout, vider un token, etc.
+      // Pour l'instant on redirige vers une page logout.html fictive
+      window.location.href = 'logout.html';
+    }
+  </script>
+
+</body>
+</html>

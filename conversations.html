@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conversations</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      color: #003366;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #004080;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .back-button {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: white;
+      color: #004080;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .conversation {
+      background-color: #ffffff;
+      border: 1px solid #0074d9;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .conversation:hover {
+      background-color: #e0f0ff;
+    }
+
+    .conversation h3 {
+      margin: 0 0 5px;
+      font-size: 1.1rem;
+      color: #004080;
+    }
+
+    .conversation p {
+      margin: 0;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.2rem;
+      }
+
+      .back-button {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+
+      .conversation h3 {
+        font-size: 1rem;
+      }
+
+      .conversation p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>💬 Conversations</h1>
+    <button class="back-button" onclick="window.location.href='messagerie.html'">⬅ Retour</button>
+  </header>
+
+  <main>
+    <!-- Liste simulée de conversations -->
+    <div class="conversation" onclick="alert('Ouvrir conversation avec la direction')">
+      <h3>📁 Direction</h3>
+      <p>Dernier message : Merci pour votre retour...</p>
+    </div>
+
+    <div class="conversation" onclick="alert('Ouvrir conversation avec Prof. Maths')">
+      <h3>📁 Prof. de Mathématiques</h3>
+      <p>Dernier message : Voici le corrigé demandé...</p>
+    </div>
+
+    <div class="conversation" onclick="alert('Ouvrir conversation avec Prof. Histoire')">
+      <h3>📁 Prof. d’Histoire</h3>
+      <p>Dernier message : À rendre pour lundi...</p>
+    </div>
+
+    <!-- Tu peux ajouter d'autres ici -->
+  </main>
+
+</body>
+</html>

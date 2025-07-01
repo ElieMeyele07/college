@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Items – Examen d’État</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      color: #003366;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #004080;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .back-button {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: white;
+      color: #004080;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .item-card {
+      background-color: #ffffff;
+      border: 1px solid #0074d9;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .item-card h3 {
+      margin: 0 0 8px;
+      color: #004080;
+    }
+
+    .item-card p {
+      margin: 4px 0;
+      font-size: 0.95rem;
+    }
+
+    .item-card button {
+      margin-top: 10px;
+      background-color: #0074d9;
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    .item-card button:hover {
+      background-color: #005fa3;
+    }
+
+    @media (max-width: 600px) {
+      .item-card h3 {
+        font-size: 1.1rem;
+      }
+      .item-card p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📚 Items</h1>
+    <button class="back-button" onclick="window.location.href='index.html'">⬅ Retour</button>
+  </header>
+
+  <main>
+    <!-- Exemple d'item 1 -->
+    <div class="item-card">
+      <h3>Item : Mathématiques – Série A</h3>
+      <p>Auteur : Prof. Kabila</p>
+      <p>Date : 01/07/2025 à 09h30</p>
+      <button onclick="window.open('pdfs/item-maths.pdf', '_blank')">📄 Ouvrir le PDF</button>
+    </div>
+
+    <!-- Exemple d'item 2 -->
+    <div class="item-card">
+      <h3>Item : Biologie – Révision générale</h3>
+      <p>Auteur : Prof. Mwamba</p>
+      <p>Date : 28/06/2025 à 14h00</p>
+      <button onclick="window.open('pdfs/item-biologie.pdf', '_blank')">📄 Ouvrir le PDF</button>
+    </div>
+
+    <!-- Exemple d'item 3 -->
+    <div class="item-card">
+      <h3>Item : Français – Dissertation</h3>
+      <p>Auteur : Prof. Tshimanga</p>
+      <p>Date : 25/06/2025 à 11h15</p>
+      <button onclick="window.open('pdfs/item-francais.pdf', '_blank')">📄 Ouvrir le PDF</button>
+    </div>
+  </main>
+
+</body>
+</html>

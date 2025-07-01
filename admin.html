@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accueil Admin – Collège Sainte Christine</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #121212;
+      color: #fff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.light-mode {
+      background-color: #f5f9ff;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(120deg, #1e40af, #2563eb);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      font-weight: 600;
+      font-size: 24px;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 30px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: #1f2937;
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      font-weight: 600;
+      font-size: 16px;
+      color: #60a5fa;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+
+    body.light-mode .card {
+      background: #fff;
+      color: #004aad;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 24px rgba(0, 0, 0, 0.6);
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    body.light-mode .card:hover {
+      background-color: #d6e9ff;
+      color: #004aad;
+    }
+
+    .card-icon {
+      font-size: 48px;
+    }
+
+    .toggle-mode {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #2563eb;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .toggle-mode:hover {
+      background-color: #1e40af;
+    }
+
+    .logout-btn {
+      background-color: #e11d48;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 25px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      max-width: 200px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logout-btn:hover {
+      background-color: #be123c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>Accueil Administration</header>
+
+  <main>
+    <button class="toggle-mode" onclick="toggleMode()">🌙 Mode</button>
+
+    <div class="grid">
+      <a href="profil_admin.html" class="card">
+        <div class="card-icon">👤</div>
+        Profil
+      </a>
+      <a href="statistiques_admin.html" class="card">
+        <div class="card-icon">📊</div>
+        Statistiques Admin
+      </a>
+      <a href="base_admin.html" class="card">
+        <div class="card-icon">📚</div>
+        Base Admin
+      </a>
+      <a href="publication.html" class="card">
+        <div class="card-icon">📚</div>
+        Publication
+      </a>
+      <a href="messages_admin.html" class="card">
+        <div class="card-icon">💬</div>
+        Messagerie
+      </a>
+    </div>
+
+    <button class="logout-btn" onclick="window.location.href='login.html'">Se déconnecter</button>
+  </main>
+
+  <footer>© Collège Sainte Christine – Administration</footer>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Horaire</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      color: #003366;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background-color: #004080;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: bold;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .back-button {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .back-button:hover {
+      background-color: white;
+      color: #004080;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* Onglets horizontaux */
+    .tab-list {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #0074d9;
+      scrollbar-width: none;
+      user-select: none;
+    }
+    .tab-list::-webkit-scrollbar {
+      display: none;
+    }
+    .tab {
+      flex: 0 0 auto;
+      padding: 10px 25px;
+      background-color: #cce4ff;
+      color: #004080;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .tab.active {
+      background-color: #004080;
+      color: white;
+      cursor: default;
+    }
+
+    /* Zone PDF */
+    .pdf-container {
+      flex: 1;
+      margin-top: 10px;
+      border: 1px solid #0074d9;
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 400px;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Bouton télécharger */
+    .download-btn {
+      margin-top: 15px;
+      align-self: flex-end;
+      background-color: #0074d9;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .download-btn:hover {
+      background-color: #005fa3;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.2rem;
+        padding: 10px 15px;
+      }
+      .back-button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+      .tab {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+      }
+      .download-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📅 Horaire</h1>
+    <button class="back-button" onclick="window.location.href='index.html'">⬅ Retour</button>
+  </header>
+
+  <main>
+    <div class="tab-list" role="tablist">
+      <div class="tab active" role="tab" tabindex="0" aria-selected="true" data-pdf="horaire.pdf">Horaire</div>
+      <div class="tab" role="tab" tabindex="-1" aria-selected="false" data-pdf="horaire_examen.pdf">Horaire examen</div>
+    </div>
+
+    <div class="pdf-container">
+      <iframe src="horaire.pdf" id="pdf-frame" title="Document PDF Horaire"></iframe>
+    </div>
+
+    <button class="download-btn" id="download-btn">⬇ Télécharger le PDF</button>
+  </main>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const iframe = document.getElementById('pdf-frame');
+    const downloadBtn = document.getElementById('download-btn');
+
+    function updateDownloadLink(pdfSrc) {
+      // Crée un lien de téléchargement "download" qui force le téléchargement du PDF
+      downloadBtn.onclick = () => {
+        // Création d’un lien temporaire
+        const link = document.createElement('a');
+        link.href = pdfSrc;
+        // On force le téléchargement avec l’attribut download
+        link.download = pdfSrc.split('/').pop();
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        if(tab.classList.contains('active')) return;
+
+        // Désactive les autres onglets
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+          t.setAttribute('tabindex', '-1');
+        });
+
+        // Active l'onglet cliqué
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        tab.setAttribute('tabindex', '0');
+
+        // Change la source du PDF dans l'iframe
+        const pdfSrc = tab.getAttribute('data-pdf');
+        iframe.src = pdfSrc;
+
+        // Met à jour le bouton téléchargement
+        updateDownloadLink(pdfSrc);
+      });
+    });
+
+    // Initialiser le bouton téléchargement avec le PDF par défaut
+    updateDownloadLink('horaire.pdf');
+  </script>
+</body>
+</html>

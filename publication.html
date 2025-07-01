@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nouvelle Publication – Collège Sainte Christine</title>
+  <style>
+    /* Styles par défaut : mode sombre */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      margin: 0;
+      padding: 20px;
+      color: #ddd;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      background: linear-gradient(120deg, #004aad, #0076d1);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    #toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: #121212;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #1e293b;
+      padding: 25px 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #60a5fa;
+    }
+
+    select, input[type="text"], textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1.8px solid #0076d1;
+      border-radius: 10px;
+      font-size: 16px;
+      resize: vertical;
+      font-family: inherit;
+      background-color: #374151;
+      color: #ddd;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    textarea {
+      min-height: 120px;
+    }
+
+    input[type="file"] {
+      margin-bottom: 25px;
+      color: #ddd;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0066cc;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Mode clair */
+    body.light-mode {
+      background-color: #f0f4ff;
+      color: #222;
+    }
+
+    body.light-mode header {
+      background: linear-gradient(120deg, #004aad, #0076d1);
+      color: white;
+    }
+
+    body.light-mode #toggle-theme {
+      background-color: #121212;
+      color: white;
+    }
+
+    body.light-mode form {
+      background: #ffffff;
+      color: #222;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    body.light-mode label {
+      color: #004aad;
+    }
+
+    body.light-mode select, 
+    body.light-mode input[type="text"], 
+    body.light-mode textarea {
+      background-color: #e2e8f0;
+      color: #222;
+      border: 1.8px solid #0076d1;
+    }
+
+    body.light-mode input[type="file"] {
+      color: #222;
+    }
+
+    body.light-mode button[type="submit"] {
+      background-color: #004aad;
+      color: white;
+    }
+
+    body.light-mode button[type="submit"]:hover {
+      background-color: #003580;
+    }
+
+    body.light-mode .back-link {
+      color: #004aad;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Nouvelle Publication</h1>
+    <button id="toggle-theme">☀️ Mode clair</button>
+  </header>
+
+  <form id="publication-form">
+    <label for="type">Type de publication</label>
+    <select id="type" required>
+      <option value="" disabled selected>-- Sélectionnez un type --</option>
+      <option value="horaire">Horaire</option>
+      <option value="horaire-examen">Horaire Examen</option>
+      <option value="repechage">Repêchage</option>
+      <option value="item">Item</option>
+      <option value="annonce">Annonce</option>
+    </select>
+
+    <label for="title">Titre</label>
+    <input type="text" id="title" placeholder="Entrez un titre" required />
+
+    <label for="message">Message</label>
+    <textarea id="message" placeholder="Écrivez votre message ici..." required></textarea>
+
+    <label for="pdf">Fichier PDF (optionnel)</label>
+    <input type="file" id="pdf" accept="application/pdf" />
+
+    <button type="submit">Envoyer la publication</button>
+  </form>
+
+  <a href="admin.html" class="back-link">⬅ Retour à l'accueil</a>
+
+  <script>
+    // Bascule mode clair / sombre
+    const toggleBtn = document.getElementById('toggle-theme');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      if(document.body.classList.contains('light-mode')) {
+        toggleBtn.textContent = '🌙 Mode sombre';
+        toggleBtn.style.backgroundColor = '#121212';
+        toggleBtn.style.color = 'white';
+      } else {
+        toggleBtn.textContent = '☀️ Mode clair';
+        toggleBtn.style.backgroundColor = 'white';
+        toggleBtn.style.color = '#121212';
+      }
+    });
+
+    // Gestion envoi formulaire
+    document.getElementById('publication-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const type = document.getElementById('type').value;
+      const title = document.getElementById('title').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const pdfInput = document.getElementById('pdf');
+      const pdfFile = pdfInput.files.length > 0 ? pdfInput.files[0].name : 'Aucun fichier';
+
+      if(!type || !title || !message) {
+        alert('Veuillez remplir tous les champs obligatoires.');
+        return;
+      }
+
+      alert(
+        `Publication envoyée !\n\n` +
+        `Type : ${type}\n` +
+        `Titre : ${title}\n` +
+        `Message : ${message}\n` +
+        `Fichier PDF : ${pdfFile}`
+      );
+
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>

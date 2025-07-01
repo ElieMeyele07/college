@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Messagerie Admin – Collège Sainte Christine</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0; 
+    background-color: #121212;
+    color: #ddd;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  header {
+    background: linear-gradient(120deg, #004aad, #0076d1);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  #toggle-theme {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    color: #121212;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    overflow: hidden;
+  }
+
+  /* Liste des messages */
+  .messages-list {
+    width: 280px;
+    background: #1e293b;
+    border-radius: 12px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+  }
+
+  .messages-list.light-mode {
+    background: #f0f4ff;
+    color: #222;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .messages-list h2 {
+    margin: 0;
+    padding: 15px;
+    background-color: #004aad;
+    border-radius: 12px 12px 0 0;
+    font-weight: 700;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+
+  ul li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #374151;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  ul li:hover, ul li.active {
+    background-color: #0076d1;
+    color: white;
+  }
+
+  ul li.light-mode {
+    border-bottom: 1px solid #cbd5e1;
+  }
+
+  ul li.light-mode:hover, ul li.light-mode.active {
+    background-color: #004aad;
+    color: white;
+  }
+
+  /* Détails du message */
+  .message-detail {
+    flex: 1;
+    background: #1e293b;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+  }
+
+  .message-detail.light-mode {
+    background: #f0f4ff;
+    color: #222;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .message-header {
+    padding: 15px;
+    border-bottom: 1px solid #374151;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .message-header.light-mode {
+    border-color: #cbd5e1;
+  }
+
+  .message-content {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+
+  .reply-section {
+    border-top: 1px solid #374151;
+    padding: 15px;
+    background: #2c3e6f;
+    display: flex;
+    gap: 10px;
+  }
+
+  .reply-section.light-mode {
+    background: #dbeafe;
+    border-color: #cbd5e1;
+  }
+
+  textarea {
+    flex: 1;
+    resize: none;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  button.send-btn {
+    background-color: #004aad;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button.send-btn:hover {
+    background-color: #0066cc;
+  }
+
+  a.back-link {
+    text-align: center;
+    padding: 10px;
+    background: #004aad;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  /* Mode clair */
+  body.light-mode {
+    background-color: #f0f4ff;
+    color: #222;
+  }
+
+  body.light-mode header {
+    background: linear-gradient(120deg, #004aad, #0076d1);
+  }
+
+  body.light-mode #toggle-theme {
+    background-color: #121212;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>Messagerie Admin</h1>
+    <button id="toggle-theme">☀️ Mode clair</button>
+  </header>
+
+  <main>
+    <section class="messages-list" id="messages-list">
+      <h2>Messages Élèves</h2>
+      <ul id="message-items">
+        <!-- Messages insérés via JS -->
+      </ul>
+    </section>
+
+    <section class="message-detail" id="message-detail" style="display:none;">
+      <div class="message-header" id="detail-header"></div>
+      <div class="message-content" id="detail-content"></div>
+      <div class="reply-section">
+        <textarea id="reply-text" rows="3" placeholder="Écrire une réponse..."></textarea>
+        <button class="send-btn" id="send-reply-btn">Envoyer</button>
+      </div>
+    </section>
+  </main>
+
+  <a href="admin.html" class="back-link">⬅ Retour à l'accueil</a>
+
+  <script>
+    // Exemple de messages d'élèves simulés
+    const messages = [
+      { id: 1, from: 'Alice M.', subject: 'Question sur l\'exercice', content: 'Bonjour, je n\'ai pas compris la question 3 de l\'exercice 5. Pouvez-vous m\'aider ?' },
+      { id: 2, from: 'Bob K.', subject: 'Demande d\'absence', content: 'Je serai absent le vendredi prochain pour raison familiale.' },
+      { id: 3, from: 'Claire D.', subject: 'Problème de connexion', content: 'Je n\'arrive pas à accéder aux ressources en ligne.' }
+    ];
+
+    const messageListElem = document.getElementById('message-items');
+    const detailSection = document.getElementById('message-detail');
+    const detailHeader = document.getElementById('detail-header');
+    const detailContent = document.getElementById('detail-content');
+    const replyText = document.getElementById('reply-text');
+    const sendReplyBtn = document.getElementById('send-reply-btn');
+
+    let activeMessageId = null;
+
+    // Affiche la liste des messages
+    function renderMessageList() {
+      messageListElem.innerHTML = '';
+      messages.forEach(msg => {
+        const li = document.createElement('li');
+        li.textContent = `${msg.from} — ${msg.subject}`;
+        li.dataset.id = msg.id;
+        li.tabIndex = 0;
+        li.classList.add('message-item');
+        li.addEventListener('click', () => selectMessage(msg.id));
+        li.addEventListener('keypress', e => { if(e.key === 'Enter') selectMessage(msg.id); });
+        messageListElem.appendChild(li);
+      });
+    }
+
+    // Affiche un message
+    function selectMessage(id) {
+      activeMessageId = id;
+      const msg = messages.find(m => m.id === id);
+      if(!msg) return;
+
+      // Affiche la section détail
+      detailSection.style.display = 'flex';
+      detailHeader.textContent = `${msg.from} — ${msg.subject}`;
+      detailContent.textContent = msg.content;
+      replyText.value = '';
+
+      // Marquer l'élément actif
+      [...messageListElem.children].forEach(li => {
+        li.classList.toggle('active', li.dataset.id == id);
+        if(document.body.classList.contains('light-mode')) {
+          if(li.classList.contains('active')) {
+            li.classList.add('light-mode');
+          } else {
+            li.classList.remove('light-mode');
+          }
+        }
+      });
+    }
+
+    // Envoi réponse simulé
+    sendReplyBtn.addEventListener('click', () => {
+      const reply = replyText.value.trim();
+      if(!reply) {
+        alert('Écrivez une réponse avant d\'envoyer.');
+        return;
+      }
+
+      alert(`Réponse envoyée à l'élève:\n\n${reply}`);
+      replyText.value = '';
+    });
+
+    // Gestion bascule mode clair/sombre
+    const toggleBtn = document.getElementById('toggle-theme');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      if(document.body.classList.contains('light-mode')) {
+        toggleBtn.textContent = '🌙 Mode sombre';
+        toggleBtn.style.backgroundColor = '#121212';
+        toggleBtn.style.color = 'white';
+      } else {
+        toggleBtn.textContent = '☀️ Mode clair';
+        toggleBtn.style.backgroundColor = 'white';
+        toggleBtn.style.color = '#121212';
+      }
+
+      // Ajuste les styles listes/messages pour mode clair
+      const messagesList = document.querySelector('.messages-list');
+      const messageDetail = document.querySelector('.message-detail');
+      if(document.body.classList.contains('light-mode')) {
+        messagesList.classList.add('light-mode');
+        messageDetail.classList.add('light-mode');
+      } else {
+        messagesList.classList.remove('light-mode');
+        messageDetail.classList.remove('light-mode');
+      }
+    });
+
+    renderMessageList();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base Admin – Collège Sainte Christine</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 10px;
+      background: linear-gradient(120deg, #1e40af, #2563eb);
+      color: white;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    #toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: #121212;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #1f2937;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #60a5fa;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background-color: #374151;
+      color: white;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .add-btn {
+      flex: 1;
+      padding: 12px;
+      background-color: #2563eb;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .excel-btn {
+      background-color: #10b981;
+    }
+
+    .search-container {
+      max-width: 700px;
+      margin: 40px auto 10px;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 12px;
+      background-color: #374151;
+      color: white;
+      border: none;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      max-width: 700px;
+      margin: 10px auto;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #374151;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #1e293b;
+    }
+
+    tr:hover {
+      background-color: #334155;
+    }
+
+    .btn-small {
+      padding: 6px 10px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      margin: 2px;
+      color: white;
+    }
+
+    .btn-danger {
+      background-color: #e11d48;
+    }
+
+    .btn-warning {
+      background-color: #f59e0b;
+    }
+
+    .btn-success {
+      background-color: #22c55e;
+    }
+
+    .suspendu {
+      background-color: #7f1d1d !important;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* Mode clair */
+    body.light-mode {
+      background-color: #f0f4ff;
+      color: #000;
+    }
+
+    body.light-mode .form-container {
+      background-color: #ffffff;
+    }
+
+    body.light-mode input,
+    body.light-mode select,
+    body.light-mode .search-container input {
+      background-color: #e2e8f0;
+      color: #000;
+    }
+
+    body.light-mode th {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    body.light-mode tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    body.light-mode tr:hover {
+      background-color: #cbd5e1;
+    }
+
+    body.light-mode .suspendu {
+      background-color: #fecaca !important;
+    }
+
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      th {
+        display: none;
+      }
+
+      td {
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid #374151;
+      }
+
+      td::before {
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #60a5fa;
+      }
+
+      td:nth-child(1)::before { content: "Nom"; }
+      td:nth-child(2)::before { content: "Post-nom"; }
+      td:nth-child(3)::before { content: "Numéro"; }
+      td:nth-child(4)::before { content: "Email"; }
+      td:nth-child(5)::before { content: "Mot de passe"; }
+      td:nth-child(6)::before { content: "Rôle"; }
+      td:nth-child(7)::before { content: "Classe"; }
+      td:nth-child(8)::before { content: "Actions"; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Base Administrative</h1>
+    <button id="toggle-theme" onclick="toggleTheme()">☀️ Mode clair</button>
+  </header>
+
+  <div class="form-container">
+    <div class="form-group"><label>Nom</label><input type="text" id="nom"></div>
+    <div class="form-group"><label>Post-nom</label><input type="text" id="postnom"></div>
+    <div class="form-group"><label>Numéro</label><input type="text" id="numero"></div>
+    <div class="form-group"><label>Email</label><input type="email" id="email"></div>
+    <div class="form-group"><label>Classe</label><input type="text" id="classe"></div>
+    <div class="form-group"><label>Mot de passe (auto)</label><input type="text" id="password" readonly></div>
+    <div class="form-group">
+      <label>Rôle</label>
+      <select id="role">
+        <option value="Élève">Élève</option>
+        <option value="Professeur">Professeur</option>
+      </select>
+    </div>
+    <div class="actions">
+      <button class="add-btn" onclick="ajouterUtilisateur()">Ajouter</button>
+      <button class="add-btn excel-btn">Importer Excel</button>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="search" placeholder="🔍 Rechercher nom, mail, numéro..." onkeyup="rechercher()">
+  </div>
+
+  <table id="table-utilisateurs">
+    <thead>
+      <tr>
+        <th>Nom</th><th>Post-nom</th><th>Numéro</th><th>Email</th><th>Mot de passe</th><th>Rôle</th><th>Classe</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <footer>© Collège Sainte Christine – Administration</footer>
+
+  <script>
+    function genererMotDePasse() {
+      const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+      let pass = "";
+      for (let i = 0; i < 5; i++) {
+        pass += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return pass;
+    }
+
+    function ajouterUtilisateur() {
+      const nom = document.getElementById("nom").value;
+      const postnom = document.getElementById("postnom").value;
+      const numero = document.getElementById("numero").value;
+      const email = document.getElementById("email").value;
+      const classe = document.getElementById("classe").value;
+      const role = document.getElementById("role").value;
+      const password = genererMotDePasse();
+      document.getElementById("password").value = password;
+
+      if (!nom || !postnom || !numero || !email || !classe) {
+        alert("Veuillez remplir tous les champs !");
+        return;
+      }
+
+      const tbody = document.querySelector("#table-utilisateurs tbody");
+      const row = tbody.insertRow();
+      row.innerHTML = `
+        <td>${nom}</td>
+        <td>${postnom}</td>
+        <td>${numero}</td>
+        <td>${email}</td>
+        <td>${password}</td>
+        <td>${role}</td>
+        <td>${classe}</td>
+        <td>
+          <button class="btn-small btn-danger" onclick="supprimerLigne(this)">Supprimer</button>
+          <button class="btn-small btn-warning" onclick="suspendreLigne(this)">Suspendre</button>
+        </td>
+      `;
+
+      document.getElementById("nom").value = "";
+      document.getElementById("postnom").value = "";
+      document.getElementById("numero").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("classe").value = "";
+      document.getElementById("role").value = "Élève";
+    }
+
+    function supprimerLigne(btn) {
+      const row = btn.closest("tr");
+      row.remove();
+    }
+
+    function suspendreLigne(btn) {
+      const row = btn.closest("tr");
+      const isSuspended = row.classList.contains("suspendu");
+
+      if (isSuspended) {
+        row.classList.remove("suspendu");
+        row.style.backgroundColor = "";
+        btn.textContent = "Suspendre";
+        btn.classList.remove("btn-success");
+        btn.classList.add("btn-warning");
+      } else {
+        row.classList.add("suspendu");
+        row.style.backgroundColor = "#7f1d1d";
+        btn.textContent = "Réactiver";
+        btn.classList.remove("btn-warning");
+        btn.classList.add("btn-success");
+      }
+    }
+
+    function rechercher() {
+      const input = document.getElementById("search").value.toLowerCase();
+      const rows = document.querySelectorAll("#table-utilisateurs tbody tr");
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+      });
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      const btn = document.getElementById("toggle-theme");
+
+      body.classList.toggle("light-mode");
+
+      if (body.classList.contains("light-mode")) {
+        btn.textContent = "🌙 Mode sombre";
+        btn.style.backgroundColor = "#121212";
+        btn.style.color = "white";
+      } else {
+        btn.textContent = "☀️ Mode clair";
+        btn.style.backgroundColor = "white";
+        btn.style.color = "#121212";
+      }
+    }
+  </script>
+
+</body>
+</html>
